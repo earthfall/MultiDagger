@@ -1,4 +1,13 @@
 package com.example.multidagger.di;
 
-public class ServiceBuildersModule {
+import com.example.multidagger.service.RequestService;
+
+import dagger.Module;
+import dagger.android.ContributesAndroidInjector;
+
+@Module
+abstract class ServiceBuildersModule {
+
+    @ContributesAndroidInjector
+    abstract RequestService contributeRequestService();
 }
