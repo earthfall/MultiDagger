@@ -17,6 +17,16 @@ public class RequestService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return new IRequest.Stub() {
+            @Override
+            public String getText() {
+                return "Hello";
+            }
+
+            @Override
+            public void setText(String text) {
+
+            }
+        };
     }
 }
