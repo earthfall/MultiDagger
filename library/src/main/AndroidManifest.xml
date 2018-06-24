@@ -8,11 +8,5 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <service android:name="com.example.multidagger.service.RequestService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.example.multidagger.intent.action.Request" />
-            </intent-filter>
-        </service>
     </application>
 </manifest>

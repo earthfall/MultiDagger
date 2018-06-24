@@ -16,6 +16,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
+// TODO: ServiceConnection has leakage
 public class RequestClientImpl implements RequestClient, AutoCloseable {
     private static final String TAG = "TestRequest";
 
@@ -80,7 +81,7 @@ public class RequestClientImpl implements RequestClient, AutoCloseable {
         Log.d(TAG, "Cleaning up service connection");
 
         context.unbindService(serviceConnection);
-        if (disposables != null && !disposables.isDisposed()) {
+        if (!disposables.isDisposed()) {
             disposables.dispose();
         }
     }

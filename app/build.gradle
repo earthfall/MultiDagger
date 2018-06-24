@@ -10,7 +10,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,4 +21,5 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$support_version"
 
     implementation project(':library')
+    implementation project(':service')
 }

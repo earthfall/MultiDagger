@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.multidagger.service">
+    <application>
+        <service android:name=".RequestService"
+                 android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.multidagger.intent.action.Request" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
