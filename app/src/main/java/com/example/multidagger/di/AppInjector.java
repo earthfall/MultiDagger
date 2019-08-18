@@ -12,8 +12,8 @@ import com.example.multidagger.Injectable;
 import com.example.multidagger.MultiDaggerApplication;
 
 import dagger.android.AndroidInjection;
+import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.HasSupportFragmentInjector;
 
 public class AppInjector {
     private AppInjector() {
@@ -65,7 +65,7 @@ public class AppInjector {
     }
 
     private static void handleActivity(Activity activity) {
-        if (activity instanceof HasSupportFragmentInjector) {
+        if (activity instanceof HasAndroidInjector) {
             AndroidInjection.inject(activity);
         }
 

@@ -22,8 +22,8 @@ ext {
     targetSdkVersion = 26
 
     applicationId = "com.example.multidagger"
-    versionCode = 3
-    versionName = "1.3"
+    versionCode = 4
+    versionName = "1.4"
 }
 
 task clean(type: Delete) {
