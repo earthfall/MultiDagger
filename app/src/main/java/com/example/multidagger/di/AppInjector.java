@@ -3,9 +3,10 @@ package com.example.multidagger.di;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.multidagger.Injectable;
 import com.example.multidagger.MultiDaggerApplication;
@@ -73,7 +74,7 @@ public class AppInjector {
                 .registerFragmentLifecycleCallbacks(
                     new FragmentManager.FragmentLifecycleCallbacks() {
                         @Override
-                        public void onFragmentCreated(FragmentManager fm, Fragment fragment, Bundle savedInstanceState) {
+                        public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment fragment, Bundle savedInstanceState) {
                             if (fragment instanceof Injectable) {
                                 AndroidSupportInjection.inject(fragment);
                             }

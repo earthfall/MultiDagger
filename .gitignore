@@ -1,5 +1,9 @@
 *.iml
 .gradle
+.project
+.classpath
+.settings/
+.vscode
 /local.properties
 .idea/
 .DS_Store

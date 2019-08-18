@@ -21,7 +21,5 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
 
     testImplementation "junit:junit:$junit_test_version"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso_test_version", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_test_version"
 }

@@ -1,9 +1,9 @@
 package com.example.multidagger.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.multidagger.request.RequestClient;
 import com.example.multidagger.request.RequestClientImpl;
 
