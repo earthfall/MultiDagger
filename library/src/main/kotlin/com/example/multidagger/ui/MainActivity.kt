@@ -3,7 +3,6 @@ package com.example.multidagger.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.multidagger.Injectable
 import com.example.multidagger.request.RequestClientImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -11,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 
 private const val TAG = "TestActivity"
 
-class MainActivity : AppCompatActivity(), Injectable {
+class MainActivity : AppCompatActivity() {
 
     private val disposables = CompositeDisposable()
 
