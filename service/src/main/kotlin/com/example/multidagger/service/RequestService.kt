@@ -16,13 +16,11 @@ class RequestService : Service() {
     @Inject
     internal lateinit var sharedPreferences: SharedPreferences
 
-    override fun onBind(intent: Intent): IBinder? {
-        return object : IRequest.Stub() {
-            override fun getText() = sharedPreferences.getString(KEY, "Hello")
+    override fun onBind(intent: Intent): IBinder = object : IRequest.Stub() {
+        override fun getText() = sharedPreferences.getString(KEY, "Hello")
 
-            override fun setText(text: String) = sharedPreferences.edit {
-                putString(KEY, text)
-            }
+        override fun setText(text: String) = sharedPreferences.edit {
+            putString(KEY, text)
         }
     }
 }

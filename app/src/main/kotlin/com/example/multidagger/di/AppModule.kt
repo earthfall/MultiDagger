@@ -14,7 +14,6 @@ import dagger.hilt.components.SingletonComponent
 internal object AppModule {
 
     @Provides
-    fun providesSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("test", Context.MODE_PRIVATE)
-    }
+    fun providesSharedPreference(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences("test", Context.MODE_PRIVATE)
 }

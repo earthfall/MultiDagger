@@ -34,43 +34,37 @@ class RequestClientImpl(private val context: Context) : RequestClient, AutoClose
     }
 
     override val text: Single<String>
-        get() {
-            val subject = PublishSubject.create<String>()
-            val disposable = serviceSubject.subscribe({
+        get() = with(PublishSubject.create<String>()) {
+            disposables.add(serviceSubject.subscribe({
                 try {
-                    subject.onNext(it.text)
+                    onNext(it.text)
                 } catch (e: RemoteException) {
-                    subject.onError(e)
+                    onError(e)
                 }
-            }, { subject.onError(it) })
-
-            disposables.add(disposable)
-            return subject.firstOrError()
+            }, { onError(it) }))
+            return firstOrError()
         }
 
     init {
         context.bindService(
-                Intent("com.example.multidagger.intent.action.Request").apply {
-                    setPackage(context.packageName)
-                },
-                serviceConnection,
-                Context.BIND_AUTO_CREATE
+            Intent("com.example.multidagger.intent.action.Request").apply {
+                setPackage(context.packageName)
+            },
+            serviceConnection,
+            Context.BIND_AUTO_CREATE
         )
     }
 
-    override fun setText(text: String): Single<Void> {
-        val subject = PublishSubject.create<Void>()
-        val disposable = serviceSubject.subscribe({
+    override fun setText(text: String): Single<Void> = with(PublishSubject.create<Void>()) {
+        disposables.add(serviceSubject.subscribe({
             try {
                 it.text = text
-                subject.onComplete()
+                onComplete()
             } catch (e: RemoteException) {
-                subject.onError(e)
+                onError(e)
             }
-        }, { subject.onError(it) })
-
-        disposables.add(disposable)
-        return subject.firstOrError()
+        }, { onError(it) }))
+        return firstOrError()
     }
 
     override fun close() {
