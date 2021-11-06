@@ -3,33 +3,31 @@ package com.example.multidagger.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.multidagger.request.RequestClientImpl
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import com.example.multidagger.request.bindServiceAndWait
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "TestActivity"
 
-class MainActivity : AppCompatActivity() {
-
-    private val disposables = CompositeDisposable()
+class MainActivity : AppCompatActivity(), LifecycleOwner {
+    private val mainCoroutine = CoroutineName("TestCoroutine")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val request = RequestClientImpl(this)
-        disposables.add(request.text
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { text -> Log.d(TAG, "Received message from service: $text") }
-        )
-    }
+        runBlocking {
+            lifecycleScope.launch(Dispatchers.Main + mainCoroutine) {
+                val service = this@MainActivity.bindServiceAndWait()
+                val text = service.text
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!disposables.isDisposed) {
-            disposables.dispose()
+                Log.d(TAG, "Received message from service: $text on ${currentCoroutineContext()[CoroutineName]?.name}")
+            }
         }
     }
 }
